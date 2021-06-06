@@ -28,7 +28,7 @@ let mod = {
         },
         {
             test: /\.html$/,
-            loader: "underscore-template-loader"
+            loader: "html-loader"
         }
     ],
 
@@ -47,7 +47,8 @@ module.exports = {
         alias: {
             'bootstrap-select-dropdown': "bootstrap-select-dropdown/src/js/bootstrap-select-dropdown"
         }
-    }
+    },
+    devtool: "source-map"
 }
 
 
