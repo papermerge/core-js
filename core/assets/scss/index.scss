@@ -1,6 +1,5 @@
 @import "~bootstrap/scss/bootstrap";
 
-@import "./fonts.scss";
 @import "./colors.scss";
 @import "./typo.scss";
 @import "./forms.scss";
@@ -17,13 +16,10 @@
 @import "./control_sidebar";
 @import "./nav_sidebar";
 @import "./search_results";
-@import "./icons";
 @import "./card";
 
 @import "./views/uploader.scss";
-@import "./views/browse.scss";
 @import "./views/metadata.scss";
-@import "./views/document.scss";
 @import "./views/access.scss";
 @import "./views/tags.scss";
 @import "./views/roles.scss";
@@ -36,15 +32,15 @@ body {
 
 // beautiful refresh feature BEGIN
 .main-header.animated-opacity {
-    opacity: 0;
+    opacity: 1;
 }
 
 aside.main-sidebar.animated-opacity {
-    opacity: 0;
+    opacity: 1;
 }
 
 .content-wrapper.animated-opacity {
-    opacity: 0;
+    opacity: 1;
 }
 // beautiful refresh feature END
 

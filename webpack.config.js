@@ -1,5 +1,4 @@
 const path = require('path');
-let MiniCssExtractPlugin = require('mini-css-extract-plugin');
 let webpack = require('webpack');
 let mode = process.env.NODE_ENV == 'production' ? 'production' : 'development';
 
@@ -13,25 +12,14 @@ let mod = {
         },
         {
           test: /\.(sa|sc|c)ss$/,
-          use:  [
-            MiniCssExtractPlugin.loader,
-            {
-                loader: 'css-loader',
-                options: { url: false }
-            },
-            {
-                loader: 'postcss-loader', // Run post css actions
-                options: {
-                    plugins: function () { // post css plugins, can be exported to postcss.config.js
-                        return [
-                            require('precss'),
-                            require('autoprefixer')
-                        ];
-                    }
-                }
-            },
-            'sass-loader'
-          ]
+          use: [
+            // Creates `style` nodes from JS strings
+            "style-loader",
+            // Translates CSS into CommonJS
+            "css-loader",
+            // Compiles Sass to CSS
+            "sass-loader",
+            ],
         },
         {
             test: /\.js$/,
@@ -46,21 +34,6 @@ let mod = {
 
 }
 
-let plug = function (mode) {
-    return [
-      new MiniCssExtractPlugin({
-        filename: mode === 'development' ? '../css/[name].debug.css' : '../css/[name].css'
-      }),
-      // https://stackoverflow.com/questions/28969861/managing-jquery-plugin-dependency-in-webpack
-        new webpack.ProvidePlugin({
-            jQuery: 'jquery',
-            $: 'jquery',
-            jquery: 'jquery',
-            'window.jQuery': 'jquery',
-        }),
-    ]
-}
-
 module.exports = {
     mode: mode,
     output: {
@@ -68,7 +41,6 @@ module.exports = {
     },
     entry: path.resolve(__dirname, 'core/index.js'),
     module: mod,
-    plugins: plug(mode),
     resolve: {
         // I got this from here
         // https://stackoverflow.com/questions/28969861/managing-jquery-plugin-dependency-in-webpack

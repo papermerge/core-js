@@ -106,17 +106,6 @@
             margin: 0;
         }
 
-
-        .icon-folder {
-            width: 8rem;
-            height: 8rem;
-            background-image: url(../img/folder.svg);
-            background-size:100% 100%;
-            @include respond(phone) {
-                width: 5rem;
-                height: 5rem;
-            }
-        }
        .title {
             text-align: center;
             opacity: 1;
