@@ -1,0 +1,93 @@
+<% if (table.rows.length > 0 ) { %>
+
+<table class="table table-striped">
+  <thead>
+    <tr class="text-uppercase">
+      <th class="border-top-0 border-right-0 border-left-0" scope="col">
+        <a 
+          href="#"
+          class="header sort d-flex justify-content-between align-items-center"
+          data-col="type"
+        >
+          <%= gettext('Type') %>
+          <i class="fa <%= table.cols[0].sort_icon_name %>"></i>
+        </a>
+      </th>
+      <th class="border-top-0 border-right-0 border-left-0" scope="col">
+        <a
+          href="#"
+          class="header sort d-flex justify-content-between align-items-center"
+          data-col="title"
+        >
+          <%= gettext('Title ') %>
+          <i class="fa <%= table.cols[1].sort_icon_name %>"></i>
+        </a>
+      </th>
+      <% for (i=0; i < table.key_cols.length; i++) { %>
+        <% column = table.key_cols[i] %>
+        <% if (column) { %>
+          <th class="border-top-0 border-right-0 border-left-0" scope="col">
+            <a 
+              href="#"
+              class="header sort d-flex justify-content-between align-items-center"
+              data-col="key" data-key="<%= column.key %>"
+            >
+              <%= column.key %>
+              <i class="fa <%= column.sort_icon_name %>"></i>
+            </a>
+          </th>
+        <% } %>
+      <% } %>
+      <th class="border-top-0 border-right-0 border-left-0" scope="col">
+        <a
+          href="#"
+          class="header sort d-flex justify-content-between align-items-center"
+          data-col="created_at"
+        >
+          <%= gettext('Created At') %>
+          <i class="fa  <%= table.cols[table.cols.length -1].sort_icon_name %>"></i>
+        </a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (i=0; i < table.rows.length; i++) { %>
+        <% row = table.rows[i] %>
+    <tr class="node" data-id="<%= row[0].id %>" data-cid="<%= row[0].cid %>" data-url="<%= row[0].url %>">
+        <td>
+          <!-- type + checkbox column -->
+          <input type="checkbox" name="_selected_action" value="<%= row[0].id %>" class="action-select mr-1" />
+            <a href="<%= row[1].url %>">
+            <% if (row[0].is_readonly) { %>
+              <i class="fa fa-lock text-danger"></i>
+            <% } %>
+          <%= row[0].value %>
+          </a>
+        </td>
+        <td>
+          <!-- title column -->
+          <a href="<%= row[1].url %>"><%= row[1].value %>
+        </td>
+        <!-- the rest of columns -->
+        <% for (j=2; j < row.length; j++) { %>
+          <td>
+            <% if (row[j].is_readonly) { %>
+                <i class="fa fa-lock text-danger"></i>
+            <% } %>
+            <%= row[j].value %>
+            </td>
+        <% } %>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<% } else { %>
+<ul id="empty-folder">
+    <div class="d-flex flex-column align-items-center">
+        <i class="fa fa-folder">
+        </i>
+        <strong class="text-muted"><%=  gettext("This folder is empty") %></strong>
+    </div>
+</ul>
+<% } %>

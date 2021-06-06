@@ -1,0 +1,39 @@
+/*
+* Right sidebar provided by AdminLTE3.
+* Right sidebar displays insformation about Metadata, Access etc
+*/
+.control-sidebar {
+	overflow: scroll;
+	span {
+	    background-color: rgba(0,0,0,0);
+	    color: #bbb;
+	    border: 1px solid #888;
+	}
+    h5 {
+
+        padding-bottom: 0.5rem;
+    }
+
+    .muted-border-bottom {
+        border-bottom: 1px solid #888;
+    }
+
+    .border-bottom {
+        border-bottom: 1px solid white;
+    }
+}
+
+.control-sidebar {
+    width: auto;
+    min-width: 350px;
+}
+
+.control-sidebar::before {
+    content: '';
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    overflow: auto;
+    
+}

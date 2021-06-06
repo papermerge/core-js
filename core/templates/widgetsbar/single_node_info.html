@@ -1,0 +1,58 @@
+<div class="card">
+    <div class="card-body">
+      <div class="card-title"><label>Info</label></div>
+      <div class="card-text">
+        <ul class="collection">
+            <li class="collection-item">
+                <% if (ctype == 'document') { %>
+                    <i class="fa fa-file text-info mr-1"></i>
+                <% } else { %>
+                    <i class="fa fa-folder text-warning mr-1"></i>
+                <% } %>
+                <%= title %>
+            </li>
+            <li class="collection-item">
+                <label><%= gettext('Owner') %>:</label> <%= owner %>
+            </li>
+            <li class="collection-item">
+                <label><%= gettext('Created') %>:</label> <%= created_at %>
+            </li>
+            <li class="collection-item">
+                <label><%= gettext('Modified') %>:</label>  <%= updated_at %>
+            </li>
+            <% if (tags.length > 0) { %>
+                <li class="collection-item">
+                    <label for="tags"><%= gettext('Tags') %>:
+                    </label>
+                    <div class="document tags-container d-flex">
+                        <% for (i=0; i < tags.length; i++) { %>
+                            <% tag = tags[i]; %>
+                        <div style="background: <%= tag.bg_color %>; color: <%= tag.fg_color %>;  border: 1px solid <%= tag.bg_color %>; border-radius: 3px;" class="tag d-flex align-items-center">
+                            <span style="color: <%= tag.fg_color %>; margin-right: 0.5rem;"><%= tag.name %></span>
+                        </div>
+                        <% } %>
+                    </div>
+                </li>
+            <% } %>
+            <li class="collection-item d-flex flex-row-reverse bordered">
+                <div class="dropdown">
+                    <button class="btn btn-flat btn-primary text-white download dropdown-toggle" type="button" data-bs-toggle="dropdown" data-toggle="dropdown" aria-expanded="false">
+                       <i class="fa fa-download mx-1"></i><%= gettext("Download") %>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="<%= download_v0_url %>" class="dropdown-item">
+                                <%= gettext('v0 - Original') %></a>
+                        </li>
+                        <li>
+                            <a href="<%= download_v1_url %>" class="dropdown-item">
+                                <%= gettext('v1 - Searchable PDF') %></a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+        </ul>
+      </div> 
+    </div>
+</div>

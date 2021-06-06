@@ -1,0 +1,81 @@
+/*
+  Remove Datalist Dropdown Arrow in Chrome
+*/
+[list]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.av-tags-container {
+  width: 100%;
+}
+
+.document.tags-container {
+  /*
+  * tags in documents right panel are readonly
+  */
+  padding: 0.25rem 0.5rem;
+  border-bottom: 0;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+
+  .tag {
+    span {
+      margin-right: 0.5rem;
+    }
+  }
+
+  input {
+    display: none;
+  }
+  i {
+    display: none;
+  }
+}
+
+.tags-container, .av-tags-container {
+    border: 1px solid #ccc;  
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    flex-wrap: wrap;
+
+    .tag {
+       padding: 0.25rem;
+       border: 1px solid #ccc;
+       margin: 0.25rem;
+       span {
+           margin-left: 0.5rem;
+           border: 0px;
+       }
+       i {
+           margin-left: 0.5rem;
+           margin-right: 0.3rem;
+           cursor: pointer; 
+       }
+       border-radius: 3px;
+    }
+
+    input {
+       outline: none;
+       border: 0;
+       width: 12rem;
+    }
+}
+/* BEGIN Pinned tags are not displayed in case of collapsed sidebar */
+body.sidebar-mini.sidebar-collapse {
+  #pinned_tags_view {
+    display: none;
+  }
+}
+body.sidebar-mini {
+  #pinned_tags_view {
+    display: block;
+  }
+}
+/* END Pinned tags are not displayed in case of collapsed sidebar */
+
+.tag {
+   padding: 0.25rem;
+   border-radius: 3px;
+   margin-right: 0.2rem;
+}

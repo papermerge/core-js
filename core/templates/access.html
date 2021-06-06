@@ -1,0 +1,67 @@
+<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title"><%= gettext('Access') %> (<%= node.get('title') %>)</h1>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <ul id="permission_actions" class="nav nav-pills">
+                <li class="mx-1">
+                    <button id="create_perm" class="btn btn-light btn-bordered">
+                        <i class="fa fa-plus mr-1 text-success"></i><%= gettext('Create') %>
+                    </button>
+                </li>
+                <li class="mx-1">
+                    <button id="edit_perm" class="btn btn-light btn-bordered">
+                        <i class="fa fa-edit mr-1 text-success"></i><%= gettext('Edit') %>
+                    </button>
+                </li>
+                <li class="mx-1">
+                    <button id="delete_perm" class="btn btn-light btn-bordered">
+                        <i class="fa fa-times mr-1 text-danger"></i><%= gettext('Delete') %>
+                    </button>
+                </li>
+                <li class="mx-1">
+                    <button id="readonly_view_perm" class="btn btn-light btn-bordered">
+                         <i class="fa fa-eye mr-1 text-success"></i><%= gettext('View') %>
+                    </button>
+                </li>
+            </ul>
+            <table class="table table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <td>
+                            <%= gettext('User or Group') %>
+                        </td>
+                        <td>
+                            <%= gettext('Type') %>
+                        </td>
+                        <td>
+                            <%= gettext('Access') %>
+                        </td>
+                    </tr>
+                </thead> <!--- header -->
+                <tbody id="access_items">
+                    <% for (i=0; i < acc_collection.models.length; i++) { %>
+                        <% item = acc_collection.models[i]; %>
+                        <tr class="<% if (item.get('access_inherited')) {  %>disabled<% } %>" data-cid="<%= item.cid  %>" data-model="<%= item.get('model')  %>"  data-name="<%= item.get('name')  %>" data-id="<%= item.get('id')  %>">
+                            <td><%= item.get('name') %></td>
+                            <td><%= gettext(item.human_access_type()) %></td>
+                            <td><%= gettext(item.human_perms()) %></td>
+                        </tr>
+                    <% } %>
+                </tbody> <!-- end of body -->
+            </table> <!--  table -->
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success action margin-xs apply">
+                <%= gettext('Apply') %>
+            </button>
+            <button data-dismiss="modal" class="btn margin-xs btn-secondary cancel">
+                <%= gettext('Cancel') %>
+            </button></a>
+        </div>
+    </div> <!-- modal content -->
+</div>

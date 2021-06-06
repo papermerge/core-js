@@ -1,0 +1,182 @@
+@import "~bootstrap/scss/bootstrap";
+
+@import "./fonts.scss";
+@import "./colors.scss";
+@import "./typo.scss";
+@import "./forms.scss";
+@import "./spinners.scss";
+@import "./changelists.scss";
+@import "./colors";
+@import "./reset";
+@import "./spinners";
+@import "./typo";
+@import "./toasts";
+@import "./tooltip";
+@import "./paginator";
+@import "./user_form";
+@import "./control_sidebar";
+@import "./nav_sidebar";
+@import "./search_results";
+@import "./icons";
+@import "./card";
+
+@import "./views/uploader.scss";
+@import "./views/browse.scss";
+@import "./views/metadata.scss";
+@import "./views/document.scss";
+@import "./views/access.scss";
+@import "./views/tags.scss";
+@import "./views/roles.scss";
+@import "./views/preferences.scss";
+@import "./views/context_menu.scss";
+
+body {
+    overflow: hidden;
+}
+
+// beautiful refresh feature BEGIN
+.main-header.animated-opacity {
+    opacity: 0;
+}
+
+aside.main-sidebar.animated-opacity {
+    opacity: 0;
+}
+
+.content-wrapper.animated-opacity {
+    opacity: 0;
+}
+// beautiful refresh feature END
+
+#pre-loader {
+    position: absolute;
+    z-index: 3000;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 105px;
+    height: 105px;
+}
+
+p {
+    a {
+        text-decoration: underline;
+    }
+}
+
+a {
+    cursor: pointer;
+}
+
+thead {
+    th {
+        font-weight: 300;
+    }
+}
+
+label:not(.form-check-label):not(.custom-file-label) {
+    font-weight: 300;
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active, .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
+    background-color: #616161;
+    color: #fff;
+    box-shadow: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.content-header {
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-item.disabled {
+    a {
+        color: #aaa;
+    }
+}
+
+.navbar-expand {
+    flex-flow: wrap;
+}
+
+li#delete.dropdown-item:hover {
+    background-color: red;
+    a {
+        background-color: red;
+        color: white;
+    }
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.content-wrapper {
+    background-color: #efefef;
+
+    .content {
+        height: 85vh;
+        min-height: 85vh;
+
+        .main-col {
+            min-height: 85vh;
+            // important for context menu.
+            // Context menu is absolutely positioned
+            // relative to its parent.
+            position: static;
+
+            .card {
+                position: static;
+            }
+        }
+        .widgetsbar-col {
+            min-height: 85vh;
+            height: 85vh;
+            overflow: scroll;
+            margin: .5rem 0 1rem;
+            margin-bottom: 0;
+
+            .card {
+                position: static;
+            }
+
+            & > .card:first-child {
+                margin-top: 0;
+            }
+
+            #widgetsbar {
+                & > .card:last-child {
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+    }
+}
+
+#breadcrumb, #search_breadcrumb {
+    background-color: white;
+}
+
+
+.breadcrumb {
+    background-color: white;
+    margin: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+
+}
+
+.btn-bordered {
+    border: 1px solid #ccc;
+    border-radius: 0;
+}
+
+.node-w1 {
+    width: 8rem;
+}

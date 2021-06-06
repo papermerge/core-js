@@ -1,0 +1,285 @@
+@import "./responsive";
+@import "./theme";
+
+aside {
+    a.download {
+        color: white;
+    }
+}
+
+#breadcrumb {
+    a.preload {
+        display: block;
+        width: 5rem;
+        height: 1rem;
+        background-color: #ccc;
+    }   
+}
+
+#document-actions {
+    top: -0.5rem;
+}
+
+// Style little button above pages thumnails.
+// This button toggles left page thumbnails panel
+#sw-left-panel {
+    outline: 1px solid #ccc;
+    background-color: white;
+}
+
+#actual-pages {
+    background-color: #ccc;
+}
+
+.page_hocr {
+    display: none;
+}
+
+// set correct height
+#document {
+    // actual height of the document
+    // is set dynamically with js code
+    // (check js/views/document.js)
+    overflow: hidden;
+    opacity: 0;
+
+    #viewer {
+        height: inherit; 
+
+        #actual-pages {
+            height: inherit;
+            overflow: scroll;
+
+            .actual-pages {
+                height: inherit;
+            }
+        }
+
+        #page-thumbnails {
+            height: inherit;
+            overflow: scroll;
+
+            .page_thumbnails {
+                height: inherit;
+                .page_number {
+                    display: flex;
+                    .number {
+                        margin: 0 0.5rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#document {
+
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+
+    text::selection {
+        color: black;
+        background-color: green;
+        font-weight: bold;
+    }
+
+    ul.page_thumbnails {
+
+        width: 10rem;
+        border-right: 1px solid #d7d7d7;
+        padding: 0;
+        border-right: 3px solid rgb(102, 102, 102);
+
+        li.page_thumbnail:hover {
+            .arrow-up-control {
+                visibility: visible;
+            }
+            .arrow-down-control {
+                visibility: visible;
+            }
+        }
+        
+        li.page_thumbnail.last:hover {
+            .arrow-down-control {
+                display: none;
+            }
+        }
+
+        li.page_thumbnail.first:hover {
+            .arrow-up-control {
+                display: none;
+            }
+        }
+
+        // when there is only one page in the document
+        // (i.e. the only page is first and last in same time)
+        // do not display arrow controls at all.
+        li.page_thumbnail.last.first:hover {
+            .arrow-down-control {
+                display: none;
+            }
+        }
+
+        li.page_thumbnail.last.first:hover {
+            .arrow-up-control {
+                display: none;
+            }
+        }
+        
+        li.page_thumbnail {
+
+            // relative position is necessary
+            // because arrow-up/arrow-down controls
+            // are absolute pos.
+            position: relative; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem;
+            margin: 0.25rem 0.5rem;
+            
+            img {
+                border: 1px solid #ccc;
+                padding: 0;
+                width: 7rem;
+            }
+
+            &.checked {
+                 background-color: $result_list_hover_bg_color;
+                 outline: 1px solid $result_list_hover_border_color;
+            }
+            input[type=checkbox] {
+                display: none;
+            }
+
+            .page_number {
+                input {
+                    width: 2rem;
+                }
+            }
+
+            .arrow-up-control {
+                a {
+                    color: #00b000;    
+                }
+                visibility: hidden;
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                
+            }
+            .arrow-down-control {
+                a {
+                    color: #00b000;    
+                }
+                visibility: hidden;
+                display: block;
+                position: absolute;
+                bottom: 1rem;
+                left: 0;
+            }
+        }
+    } // .page_thumbnails
+
+    ul.actual_pages {
+
+        overflow: auto;
+        padding: 0;
+
+        li.actual_page {
+            background-color: $gray_7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0px 4px 6px 1px rgba(0, 0, 0, 0.5);
+            min-height: 400px;
+
+            svg {
+                position: absolute;
+            }
+
+            .page_number {
+                color: white;
+                font-size: 1.4rem;
+                font-weight: bold;
+                margin: 0.75rem;
+                width: 2.5rem;
+            }
+        }
+        fieldset.module.aligned {
+            position: relative;
+
+            .field-number {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                z-index: 100;
+                background-color: $gray_9;
+                div {
+                    padding: 0.5rem 1rem;
+                    @include respond(phone) {
+                        padding: 0rem 0.25rem;
+                    }
+                    input {
+                        color: white;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    } // .actual_pages
+}
+
+.hover-danger {
+    &:hover {
+        background-color: red;
+        color: white;
+        border: 1px solid red;
+    }
+}
+
+.actual_pages {
+    .actual_page {
+        position: relative;
+        background-color: $gray_7;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0px 4px 6px 1px rgba(0, 0, 0, 0.5);
+        min-height: 400px;
+
+        svg {
+            position: absolute;
+        }
+
+    }
+}
+
+#actual-pages {
+    flex: 1;
+    overflow: hidden;
+    background-color: $light_gray_bg;
+}
+
+.actual_pages {
+
+    img {
+        box-shadow: 0px 4px 6px 1px rgba(0, 0, 0, 0.5);
+    }
+    .actual_page {
+        .page_number {
+            input {
+                color: white;
+                font-size: 1.4rem;
+                font-weight: bold;
+                width: 2.5rem;
+            }
+        }
+    }
+}
+
+.document.page {
+    background-color: #ccc;
+}

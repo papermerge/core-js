@@ -1,0 +1,19 @@
+ <% for (let i=0; i < tags.models.length; i++) { %>
+    <% model = tags.models[i] %>
+     <div class="tag d-flex align-items-center" 
+     style="color: <%= model.get('fg_color') %>; background:  <%= model.get('bg_color') %>; border-color: <%= model.get('bg_color') %>;">
+       <span style="color: <%= model.get('fg_color') %>;"><%= model.get('name') %></span>
+       <i 
+        class="fa fa-times tag-remove"
+        data-name="<%= model.get('name') %>">
+        </i>
+     </div>
+ <% } %>
+<input id="tag-input" name="tag-input" list="all_tags3" class="tag-input" />
+<datalist id="all_tags3">
+<% for (let i=0; i < all_tags.models.length; i++) { %>
+    <% model = all_tags.models[i] %>
+     <option value="<%= model.get('name') %>">
+<% } %>
+</datalist>
+<input type="hidden" name="tags" value="<%= tags.comma_sep_tags() %>" />
