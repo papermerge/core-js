@@ -1,38 +1,5 @@
 const path = require('path');
-let webpack = require('webpack');
 let mode = process.env.NODE_ENV == 'production' ? 'production' : 'development';
-
-const isDevelopment = process.env.NODE_ENV !== 'production'
-
-let mod = {
-    rules: [
-        {
-            test: /\.svg/,
-            type: 'asset/source',
-        },
-        {
-          test: /\.(sa|sc|c)ss$/,
-          use: [
-            // Creates `style` nodes from JS strings
-            "style-loader",
-            // Translates CSS into CommonJS
-            "css-loader",
-            // Compiles Sass to CSS
-            "sass-loader",
-            ],
-        },
-        {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            loader: "babel-loader"
-        },
-        {
-            test: /\.html$/,
-            loader: "html-loader"
-        }
-    ],
-
-}
 
 module.exports = {
     mode: mode,
@@ -40,7 +7,34 @@ module.exports = {
         path: path.resolve(__dirname, 'dist')
     },
     entry: path.resolve(__dirname, 'core/index.js'),
-    module: mod,
+    module:  {
+        rules: [
+            {
+                test: /\.svg/,
+                type: 'asset/resource',
+            },
+            {
+              test: /\.(sa|sc|c)ss$/,
+              use: [
+                // Creates `style` nodes from JS strings
+                "style-loader",
+                // Translates CSS into CommonJS
+                "css-loader",
+                // Compiles Sass to CSS
+                "sass-loader",
+                ],
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: "babel-loader"
+            },
+            {
+                test: /\.html$/,
+                loader: "html-loader"
+            }
+        ],
+    },
     resolve: {
         // I got this from here
         // https://stackoverflow.com/questions/28969861/managing-jquery-plugin-dependency-in-webpack
