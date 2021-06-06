@@ -1,9 +1,4 @@
-import { DgPageScroll } from "./document_form/page_scroll";
-
-import { BrowseView } from "./views/browse";
-import { BreadcrumbView } from "./views/breadcrumb";
 import { ActionsView } from "./views/actions";
-import { DocumentView, DocumentActionsView } from "./views/document";
 import { TagPreviewView } from "./views/tag_preview";
 import { AdvancedSearchTagsView } from "./views/tags";
 import { AutomateTagsView } from "./views/tags";
@@ -61,9 +56,7 @@ let App = function() {
     user_menu_view,
     wfeedback;
 
-  browse_view = new BrowseView();
   actions_view = new ActionsView();
-  breadcrumb_view = new BreadcrumbView();
   tag_preview_view = new TagPreviewView();
   pinned_tags_view = new PinnedTagsView();
   changelist_checkbox = new ChangelistCheckboxView();
@@ -73,23 +66,6 @@ let App = function() {
   context_menu_view = new ContextMenuView();
   role_multi_toggle_view = new RoleMultiToggleView();
   user_menu_view = new UserMenuView();
-
-  if ($("#document").length == 1) {
-    // we in document view. Document view and browser view
-    // are exclusive.
-    document_view = new DocumentView();
-    document_actions_view = new DocumentActionsView();
-  } else {
-    
-    browse_router = new BrowseRouter(
-      browse_view,
-      breadcrumb_view,
-      actions_view
-    );
-
-   
-    Backbone.history.start();
-  }
 
 };
 

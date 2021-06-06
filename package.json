@@ -12,7 +12,7 @@
     "core",
     "dms",
     "document management system",
-    "pdf",
+    "pdf"
   ],
   "scripts": {
     "build": "webpack",

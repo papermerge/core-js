@@ -1,9 +1,5 @@
-SHELL := /bin/bash
+build:
+	npx webpack --config webpack.config.js
 
-test:
-	TESTBUILD=true npx webpack --config webpack.config.js
-	npx karma start karma.conf.js
-
-clean:
-	rm -fr test-dist/
-
+watch:
+	npx webpack --config webpack.config --watch
