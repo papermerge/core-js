@@ -3,3 +3,6 @@ build:
 
 watch:
 	npx webpack --config webpack.config --watch
+
+publish:
+	npm publish --access public
