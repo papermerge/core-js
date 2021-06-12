@@ -3,7 +3,11 @@ import "./assets/scss/index.scss";
 import $ from "jquery";
 import { DualCommanderView } from "@papermerge/dual-commander";
 
-function adjust_panels_height(panel_left_id, panel_right_id) {
+function adjust_panels_height() {
+    /**
+     * Adjusts left and right panels' heights to fit the window size
+     *
+    */
     let nav,
         actions,
         panel_height,
@@ -11,8 +15,8 @@ function adjust_panels_height(panel_left_id, panel_right_id) {
 
     nav = document.querySelector("nav.main-header");
     actions = document.querySelector("#actions");
-    panel_left = document.querySelector(panel_left_id);
-    panel_right = document.querySelector(panel_right_id);
+    panel_left = document.querySelector("#panel_left");
+    panel_right = document.querySelector("#panel_right");
     margins_total_height = 20;
 
     if (!nav) {
@@ -63,5 +67,6 @@ $(() => {
         alert(`Panel Right: doc id=${doc.id} title=${doc.title} clicked`);
     });
 
-    adjust_panels_height("#panel_left", "#panel_right");
+    window.addEventListener('resize', adjust_panels_height);
+    adjust_panels_height();
 });
