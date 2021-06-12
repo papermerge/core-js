@@ -39,6 +39,16 @@ aside.main-sidebar.animated-opacity {
     opacity: 1;
 }
 
+// set margin to 0 so that
+// panel's height adjustment via js code will be correct
+#panel_left {
+    margin: 0;
+}
+
+#panel_right {
+    margin: 0;
+}
+
 .content-wrapper.animated-opacity {
     opacity: 1;
 }

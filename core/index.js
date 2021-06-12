@@ -3,6 +3,45 @@ import "./assets/scss/index.scss";
 import $ from "jquery";
 import { DualCommanderView } from "@papermerge/dual-commander";
 
+function adjust_panels_height(panel_left_id, panel_right_id) {
+    let nav,
+        actions,
+        panel_height,
+        margins_total_height;
+
+    nav = document.querySelector("nav.main-header");
+    actions = document.querySelector("#actions");
+    panel_left = document.querySelector(panel_left_id);
+    panel_right = document.querySelector(panel_right_id);
+    margins_total_height = 20;
+
+    if (!nav) {
+        console.error("nav.main-header not found. Cannot calculate panel height");
+        return;
+    }
+
+    if (!actions) {
+        console.error("#actions not found. Cannot calculate panel height");
+        return;
+    }
+
+    panel_height = window.innerHeight - nav.clientHeight - actions.clientHeight;
+    panel_height -= margins_total_height;
+
+    if (panel_left) {
+        panel_left.style.height = `${panel_height}px`;
+    } else {
+        console.error("left panel not found");
+        return;
+    }
+    if (panel_right) {
+        panel_right.style.height = `${panel_height}px`;
+    } else {
+        console.error("right panel not found");
+        return;
+    }
+}
+
 $(() => {
     let dual_commander;
 
@@ -23,4 +62,6 @@ $(() => {
     dual_commander.panel_view_right.on('document_clicked', (doc) => {
         alert(`Panel Right: doc id=${doc.id} title=${doc.title} clicked`);
     });
+
+    adjust_panels_height("#panel_left", "#panel_right");
 });
