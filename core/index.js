@@ -14,6 +14,8 @@ function adjust_panels_height() {
     let nav,
         actions,
         panel_height,
+        panel_right,
+        panel_left,
         margins_total_height;
 
     nav = document.querySelector("nav.main-header");
