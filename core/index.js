@@ -12,14 +12,12 @@ function adjust_panels_height() {
      *
     */
     let nav,
-        actions,
         panel_height,
         panel_right,
         panel_left,
         margins_total_height;
 
     nav = document.querySelector("nav.main-header");
-    actions = document.querySelector("#actions");
     panel_left = document.querySelector(PANEL_LEFT_ID);
     panel_right = document.querySelector(PANEL_RIGHT_ID);
     margins_total_height = 20;
@@ -29,12 +27,7 @@ function adjust_panels_height() {
         return;
     }
 
-    if (!actions) {
-        console.error("#actions not found. Cannot calculate panel height");
-        return;
-    }
-
-    panel_height = window.innerHeight - nav.clientHeight - actions.clientHeight;
+    panel_height = window.innerHeight - nav.clientHeight
     panel_height -= margins_total_height;
 
     if (panel_left) {
