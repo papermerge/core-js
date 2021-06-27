@@ -1,6 +1,6 @@
 {
   "name": "@papermerge/core",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/papermerge/core-js.git"
@@ -29,11 +29,11 @@
     "nunjucks": "^3.2.3"
   },
   "devDependencies": {
-    "@papermerge/dual-commander": "^0.3.0",
-    "@papermerge/symposium": "^0.3.0",
-    "@papermerge/viewer": "^0.2.0",
-    "@papermerge/commander": "^0.3.0",
-    "@papermerge/uploader": "^0.3.0",
+    "@papermerge/dual-commander": "^0.4.0",
+    "@papermerge/symposium": "^0.4.0",
+    "@papermerge/viewer": "^0.4.0",
+    "@papermerge/commander": "^0.4.0",
+    "@papermerge/uploader": "^0.4.0",
     "@babel/core": "^7.13.14",
     "@babel/preset-env": "^7.13.12",
     "autoprefixer": "^9.8.6",
