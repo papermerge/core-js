@@ -1,10 +1,7 @@
 import "./assets/scss/index.scss";
 
-import $ from "jquery";
 import { DualCommanderView } from "@papermerge/dual-commander";
 
-let PANEL_LEFT_ID = '#panel_left';
-let PANEL_RIGHT_ID = '#panel_right';
 
 function adjust_panels_height() {
     /**
@@ -18,8 +15,8 @@ function adjust_panels_height() {
         margins_total_height;
 
     nav = document.querySelector("nav.main-header");
-    panel_left = document.querySelector(PANEL_LEFT_ID);
-    panel_right = document.querySelector(PANEL_RIGHT_ID);
+    panel_left = document.querySelector("#panel_left");
+    panel_right = document.querySelector("#panel_right");
     margins_total_height = 20;
 
     if (!nav) {
@@ -44,25 +41,54 @@ function adjust_panels_height() {
     }
 }
 
-$(() => {
+function left_panel_from_url(url_as_string) {
+    /*
+    Looks at window.location to figure out the
+    starting folder/document of the left panel.
+
+    Returns:
+        {commander: true, folder: { id: <folder_id> }}
+        or
+        {viewer: true, doc: {id: <document_id>} }
+
+    Note that left panel will always start as opened, as such
+    if, for various reasons, function is unable to figure out
+    the folder/document to open - it will return (or try as
+    much as it can) { commander: true, folder: undefined }.
+    Undefined folder tells commander to open root folder.
+    */
+}
+
+function right_panel_from_url(url_as_string) {
+    /*
+    Looks at window.location to figure out if right panel needs to
+    be open at all, and if it yes, then what is the correct
+    folder/document to open.
+
+    Returns either:
+        { commander: true, folder: { id: <folder_id> } }
+        or
+        { viewer: true, doc: { id: <document_id> } }
+        or
+        undefined
+
+    In case of undefined return value, it signals that
+    right side panel will start as closed.
+    */
+}
+
+document.addEventListener("DOMContentLoaded", () => {
     let dual_commander;
 
 
     dual_commander = new DualCommanderView({
-        'panel_left': {'el': PANEL_LEFT_ID},
-        'panel_right': {'el': PANEL_RIGHT_ID},
+        'panel_left': {'el': '#panel_left'},
+        'panel_right': {'el': '#panel_right'},
     });
 
     dual_commander.open({
         left: {commander: true},
         right: {commander: true},
-    });
-    dual_commander.panel_view_left.on('document_clicked', (doc) => {
-        alert(`Panel Left: doc id=${doc.id} title=${doc.title} clicked`);
-    });
-
-    dual_commander.panel_view_right.on('document_clicked', (doc) => {
-        alert(`Panel Right: doc id=${doc.id} title=${doc.title} clicked`);
     });
 
     window.addEventListener('resize', adjust_panels_height);
