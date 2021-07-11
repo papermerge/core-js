@@ -43,31 +43,41 @@ function adjust_panels_height() {
 
 function left_panel_from_url(url_as_string) {
     /*
-    Looks at window.location to figure out the
+    Checks url_as_string to figure out the
     starting folder/document of the left panel.
 
     Returns:
         {commander: true, folder: { id: <folder_id> }}
         or
         {viewer: true, doc: {id: <document_id>} }
+        or
+        {commander: true}
 
-    Note that left panel will always start as opened, as such
+    Note that left panel will always start as opened;
     if, for various reasons, function is unable to figure out
     the folder/document to open - it will return (or try as
-    much as it can) { commander: true, folder: undefined }.
+    much as it can) { commander: true }.
     Undefined folder tells commander to open root folder.
     */
-    let regexp = /\/core\/folder\/([0-9]+)/,
-        _match,
+    let folder_regexp = /\/core\/folder\/([0-9]+)/,
+        viewer_regexp = /\/core\/document\/([0-9]+)/,
+        folder_match,
+        viewer_match,
         ret = undefined,
         folder_id = undefined;
 
-    _match = url_as_string.match(regexp);
+    folder_match = url_as_string.match(folder_regexp);
+    viewer_match = url_as_string.match(viewer_regexp);
 
-    if (_match) {
+    if (folder_match) {
         ret = {
             commander: true,
-            folder: { id: _match[1] }
+            folder: { id: folder_match[1] }
+        };
+    } else if (viewer_match) {
+        ret = {
+            viewer: true,
+            doc: { id: viewer_match[1] }
         };
     } else {
         ret = {
@@ -80,7 +90,7 @@ function left_panel_from_url(url_as_string) {
 
 function right_panel_from_url(url_as_string) {
     /*
-    Looks at window.location to figure out if right panel needs to be open at
+    Checks url_as_string to figure out if right panel needs to be open at
     all, and if it yes, then what is the correct folder/document to open.
 
     Returns either:
@@ -98,18 +108,27 @@ function right_panel_from_url(url_as_string) {
     (3) right side viewer will start opened with selected document
     (4) right side panel will start as closed.
     */
-    let regexp = /\/core\/folder\/([0-9]+)*/,
-        _match,
+    let folder_regexp = /\/core\/folder\/([0-9]+)*/,
+        folder_match,
+        viewer_regexp = /\/core\/document\/([0-9]+)/,
+        viewer_match,
         ret = undefined;
 
-    _match = url_as_string.match(regexp);
+    folder_match = url_as_string.match(folder_regexp);
+    viewer_match = url_as_string.match(viewer_regexp);
 
-    if (_match && _match[1]) {
+    if (folder_match && folder_match[1]) {
         ret = {
             commander: true,
-            folder: { id: _match[1] }
+            folder: { id: folder_match[1] }
         };
-    } else if (_match) {
+    } else if (viewer_match && viewer_match[1]) {
+        ret = {
+            viewer: true,
+            doc: { id: viewer_match[1] }
+        };
+
+    } else if (folder_match) {
         ret = {
             commander: true,
         };
@@ -129,10 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     left = left_panel_from_url(window.location.pathname);
-    console.log(`left = ${left}`);
-
     right = right_panel_from_url(window.location.search);
-    console.log(` right= ${right}`);
 
     dual_commander.open({
         left: left,
