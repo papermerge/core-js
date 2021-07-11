@@ -80,30 +80,38 @@ function left_panel_from_url(url_as_string) {
 
 function right_panel_from_url(url_as_string) {
     /*
-    Looks at window.location to figure out if right panel needs to
-    be open at all, and if it yes, then what is the correct
-    folder/document to open.
+    Looks at window.location to figure out if right panel needs to be open at
+    all, and if it yes, then what is the correct folder/document to open.
 
     Returns either:
-        { commander: true, folder: { id: <folder_id> } }
+        (1) { commander: true, folder: { id: <folder_id> } }
         or
-        { viewer: true, doc: { id: <document_id> } }
+        (2) { commander: true }
         or
-        undefined
+        (3) { viewer: true, doc: { id: <document_id> } }
+        or
+        (4) undefined
 
-    In case of undefined return value, it signals that
-    right side panel will start as closed.
+    Meanings are:
+    (1) right side panel will start opened with this folder as current
+    (2) right side panel will start opened with root folder
+    (3) right side viewer will start opened with selected document
+    (4) right side panel will start as closed.
     */
-    let regexp = /\/core\/folder\/([0-9]+)/,
+    let regexp = /\/core\/folder\/([0-9]+)*/,
         _match,
         ret = undefined;
 
     _match = url_as_string.match(regexp);
 
-    if (_match) {
+    if (_match && _match[1]) {
         ret = {
             commander: true,
             folder: { id: _match[1] }
+        };
+    } else if (_match) {
+        ret = {
+            commander: true,
         };
     }
 
@@ -117,6 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dual_commander = new DualCommanderView({
         'panel_left': {'el': '#panel_left'},
         'panel_right': {'el': '#panel_right'},
+        'dual_history': true
     });
 
     left = left_panel_from_url(window.location.pathname);
